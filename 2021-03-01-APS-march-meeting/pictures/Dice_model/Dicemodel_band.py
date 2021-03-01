@@ -8,22 +8,26 @@ from pythtb import * # import TB model class
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 # mpl.use('agg')
-mpl.rcParams['figure.dpi']= 300
-# font stuff
-font = {'family' : 'DejaVu Sans',
-        'weight' : 'light',
-        'size'   : 18}
+# mpl.rcParams['figure.dpi']= 300
+# # font stuff
+# font = {'family' : 'DejaVu Sans',
+#         'weight' : 'light',
+#         'size'   : 18}
+#
+# font1 = {'family' : 'DejaVu Sans',
+#         'weight' : 'light',
+#         'size'   : 14}
+#
+# font2 = {'family' : 'DejaVu Sans',
+#         'weight' : 'light',
+#         'size'   : 8}
+#
+# mpl.rc('font', **font)
+# use the following to reset style
+mpl.rcParams.update(mpl.rcParamsDefault)
 
-font1 = {'family' : 'DejaVu Sans',
-        'weight' : 'light',
-        'size'   : 14}
-
-font2 = {'family' : 'DejaVu Sans',
-        'weight' : 'light',
-        'size'   : 8}
-
-mpl.rc('font', **font)
-
+# use mystyle and set dpi to 300
+plt.style.use('mystyle_black')
 
 
 # def cal_occ(mu,evals,evacs,temperature=0.001):
@@ -123,9 +127,9 @@ else:
 if plot == True:
     fig, ax = plt.subplots(figsize=(3.6,4.4))
     #--
-    ax.plot(k_dist,evals[0],color='#1f77b4',label='Dice')
-    ax.plot(k_dist,evals[1],color='#1f77b4')
-    ax.plot(k_dist,evals[2],color='#1f77b4')
+    ax.plot(k_dist,evals[0],linewidth=4,color='#1f77b4',label='Dice')
+    ax.plot(k_dist,evals[1],linewidth=4,color='#1f77b4')
+    ax.plot(k_dist,evals[2],linewidth=4,color='#1f77b4')
     #--
     # ax.plot(k_dist,evals1[0],color='#ff7f0e',label=r'$\mathrm{\alpha-t_3}$')
     # ax.plot(k_dist,evals1[1],color='#ff7f0e')
@@ -137,17 +141,18 @@ if plot == True:
 
     # ax.set_title(str(0.16))
     # ax.set_xlabel("Path in k-space",**font)
-    ax.set_ylabel("Energy [eV]",**font)
+    ax.set_ylabel("Energy [eV]")#,**font)
     ax.set_xticks(k_node)
-    ax.set_xticklabels(k_label,**font)
+    ax.set_xticklabels(k_label)#,**font)
     ax.set_xlim(k_node[0],k_node[-1])
     # ax.set_ylim(-4,-1.2)
     for n in range(len(k_node)):
-      ax.axvline(x=k_node[n], linewidth=0.5, color='k')
+      ax.axvline(x=k_node[n], linewidth=0.5)#, color='k')
 
     # ax.legend(fontsize='small')
 
     fig.tight_layout()
+    fig.savefig('dicemodel.svg')
     # fig.show()
 #%
 # data = cal_occ(0,evals,evacs,temperature=0.001)
